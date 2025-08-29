@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+*.log
+*.db
+*.sqlite
+*.sqlite3
+*.retry
+**/outputs/
+secrets.*
+.DS_Store

@@ -1,0 +1,16 @@
+# Sample inventory; copy to devices.yaml and edit as needed
+devices:
+  - name: iosxe-sandbox
+    host: sandbox-iosxe-latest-1.cisco.com
+    os: cisco
+    platform: iosxe
+    username: developer
+    password: C1sco12345
+    port: 22
+  - name: junos-vlabs
+    host: vlabs.juniper.net
+    os: juniper
+    platform: junos
+    username: lab
+    password: lab123
+    port: 22
