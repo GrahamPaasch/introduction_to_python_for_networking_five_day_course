@@ -1,6 +1,9 @@
-"""Inventory to NAPALM getters, store results in SQLite and JSON."""
+"""Inventory to NAPALM getters, store results in SQLite and JSON.
+Supports OFFLINE=1 to read fixtures instead of connecting to devices.
+"""
 
 import json
+import os
 from typing import Any, Dict
 
 from napalm import get_network_driver  # type: ignore
@@ -10,6 +13,7 @@ from common.lib.logging_setup import setup_logging
 from common.lib.db import upsert_devices
 
 log = setup_logging("napalm-getters")
+OFFLINE = os.getenv("OFFLINE", "false").lower() in {"1", "true", "yes"}
 
 
 def main() -> None:
@@ -20,15 +24,20 @@ def main() -> None:
     upsert_devices([d.__dict__ for d in devices])
 
     results: Dict[str, Dict[str, Any]] = {}
-    for d in devices:
-        driver = get_network_driver(d.platform)
-        dev = driver(hostname=d.host, username=d.username, password=d.password, optional_args={"port": d.port})
-        log.info("Opening NAPALM connection to %s", d.name)
-        dev.open()
-        facts = dev.get_facts()
-        interfaces = dev.get_interfaces()
-        results[d.name] = {"facts": facts, "interfaces": interfaces}
-        dev.close()
+    if OFFLINE:
+        log.info("OFFLINE=1; reading NAPALM fixtures")
+        with open("common/fixtures/napalm_results.json", "r", encoding="utf-8") as f:
+            results = json.load(f)
+    else:
+        for d in devices:
+            driver = get_network_driver(d.platform)
+            dev = driver(hostname=d.host, username=d.username, password=d.password, optional_args={"port": d.port})
+            log.info("Opening NAPALM connection to %s", d.name)
+            dev.open()
+            facts = dev.get_facts()
+            interfaces = dev.get_interfaces()
+            results[d.name] = {"facts": facts, "interfaces": interfaces}
+            dev.close()
 
     with open("common/outputs/napalm_results.json", "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2)

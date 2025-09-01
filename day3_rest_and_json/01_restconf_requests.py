@@ -16,6 +16,7 @@ BASE = os.getenv("RESTCONF_BASE", "")  # e.g., https://sandbox-iosxe-latest-1.ci
 USER = os.getenv("RESTCONF_USER", "developer")
 PASS = os.getenv("RESTCONF_PASS", "C1sco12345")
 VERIFY = os.getenv("RESTCONF_VERIFY", "false").lower() == "true"
+OFFLINE = os.getenv("OFFLINE", "false").lower() in {"1", "true", "yes"}
 
 
 HEADERS = {
@@ -38,6 +39,20 @@ def get_session() -> requests.Session:
 
 def main() -> None:
     s = get_session()
+
+    if OFFLINE:
+        # Strict offline mode: use local fixtures only
+        log.info("OFFLINE=1; reading fixtures")
+        with open("common/fixtures/mock_restconf_interfaces.json", "r", encoding="utf-8") as f:
+            interfaces = json.load(f)
+        print(json.dumps(interfaces, indent=2))
+        with open("common/fixtures/jsonplaceholder_todo_1.json", "r", encoding="utf-8") as f:
+            todo: Dict = json.load(f)
+        print(json.dumps(todo, indent=2))
+        updated = {"vlan": 10, "name": "US-East-Updated"}
+        print(json.dumps(updated, indent=2))
+        log.info("Simulated DELETE ok (offline)")
+        return
 
     if restconf_enabled():
         # GET hostname (ietf-interfaces as a harmless read)

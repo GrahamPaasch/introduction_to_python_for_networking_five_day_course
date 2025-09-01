@@ -1,0 +1,27 @@
+{
+  "iosxe-sandbox": {
+    "facts": {
+      "hostname": "iosxe-sandbox",
+      "vendor": "cisco",
+      "model": "CSR1000v",
+      "os_version": "17.9.4",
+      "uptime": 123456
+    },
+    "interfaces": {
+      "GigabitEthernet1": {"is_up": true, "description": "Mgmt"}
+    }
+  },
+  "junos-vlabs": {
+    "facts": {
+      "hostname": "junos-vlabs",
+      "vendor": "juniper",
+      "model": "vmx",
+      "os_version": "21.4R3",
+      "uptime": 654321
+    },
+    "interfaces": {
+      "ge-0/0/0": {"is_up": true, "description": "Mgmt"}
+    }
+  }
+}
+
