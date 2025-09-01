@@ -12,9 +12,17 @@ BASE = os.getenv("JUNOS_API_BASE", "")  # e.g., https://<host>/rpc/
 USER = os.getenv("JUNOS_API_USER", "lab")
 PASS = os.getenv("JUNOS_API_PASS", "lab123")
 VERIFY = os.getenv("JUNOS_API_VERIFY", "false").lower() == "true"
+OFFLINE = os.getenv("OFFLINE", "false").lower() in {"1", "true", "yes"}
 
 
 def main() -> None:
+    if OFFLINE:
+        log.info("OFFLINE=1; reading Junos fixtures")
+        with open("common/fixtures/junos_software_info.json", "r", encoding="utf-8") as f:
+            data = json.load(f)
+        print(json.dumps(data, indent=2))
+        return
+
     if BASE.startswith("http"):
         with httpx.Client(verify=VERIFY, auth=(USER, PASS), timeout=10) as client:
             r = client.get(f"{BASE}get-software-information", headers={"Accept": "application/json"})

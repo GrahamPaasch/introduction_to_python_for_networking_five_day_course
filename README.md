@@ -97,6 +97,8 @@ Day 3 — REST, JSON, and Vendor APIs
 
 Expected artifacts
 - RESTCONF and Junos REST scripts with idempotent operations; fan‑out utility.
+- Offline fixtures for restricted environments; set `OFFLINE=1` to use.
+- Optional labs: XML parsing + strings, SNMP minimal, config diff demo.
 
 Day 4 — Idempotent Multi‑Vendor Configuration + Parallelism
 - 07:00–07:20 — Lecture: Idempotence patterns; dry‑run; diffs
@@ -112,6 +114,7 @@ Day 4 — Idempotent Multi‑Vendor Configuration + Parallelism
 
 Expected artifacts
 - Re‑runnable config scripts with no‑op second run; diffs captured in logs; Ansible playbooks (optional).
+- Orchestrator: `day4_multivendor_config/configure_multivendor.py` (VLAN + interface desc).
 
 Day 5 — Capstone Build and Demo
 - 07:00–07:20 — Lecture: Putting it together; demo tips
@@ -126,6 +129,49 @@ Day 5 — Capstone Build and Demo
 
 Expected artifacts
 - Working capstone that configures VLAN and interface descriptions idempotently and performs an API query across inventory with parallelism.
+
+## Validation & Offline Modes
+
+- Concept: “Validation” are quick, scriptable checks that prove a lab’s outcome. Prefer commands that return clear success/failure via exit codes and log snippets.
+- Offline: When internet access is unavailable, set `OFFLINE=1` to switch certain labs to local fixtures under `common/fixtures/`.
+
+Cheat sheet
+- Day 1 basics: run `python day1_setup/01_python_basics.py` and confirm INFO logs.
+- XML + strings: `python day1_setup/05_xml_and_strings.py` → outputs `common/outputs/devices_from_xml.json`.
+- Syslog parsing: `python day2_cli_to_data/04_syslog_parse.py` → outputs `common/outputs/syslog_events.json` (non‑empty).
+- Inventory persist: `python day2_cli_to_data/00_inventory_persist.py` → creates `common/outputs/devices.json` and `common/outputs/inventory.sqlite`.
+- NAPALM getters: `OFFLINE=1 python day2_cli_to_data/02_napalm_getters.py` → writes `common/outputs/napalm_results.json`.
+- SNMP minimal: `OFFLINE=1 python day2_cli_to_data/05_snmp_minimal.py` → writes `common/outputs/snmp_ifaces.json`.
+- RESTCONF: `OFFLINE=1 python day3_rest_and_json/01_restconf_requests.py` → prints interfaces + mock objects without network.
+- Junos REST: `OFFLINE=1 python day3_rest_and_json/02_junos_rest_httpx.py` → prints software info from fixtures.
+- Parallel fan‑out: `python day4_multivendor_config/02_parallel_fanout.py` (requires reachable devices) — success logs per host.
+- Multi‑vendor config: dry‑run `python day4_multivendor_config/configure_multivendor.py` then set `COMMIT=true` to apply; second run should show “no changes”.
+- Config diff demo: `python day4_multivendor_config/04_config_diff_demo.py` prints unified diff from fixtures.
+
+- Run multiple validations quickly: `python scripts/run_validations.py` (defaults to `OFFLINE=1`).
+
+Notes
+- All config scripts default to dry‑run. Set `COMMIT=true` to apply changes.
+- Environment secrets via `NET_USERNAME` and `NET_PASSWORD`.
+
+## Ansible (Bonus)
+
+- Inventories and playbook are in `ansible/`.
+- Prefer check mode and syntax checks first:
+  - `ansible-playbook -i ansible/inventory.yaml ansible/site.yaml --syntax-check`
+  - `ansible-playbook -i ansible/inventory.yaml ansible/site.yaml --check -v`
+- Collections (if internet available):
+  - `ansible-galaxy collection install -r ansible/requirements.yml`
+- In restricted environments, demo with `--syntax-check` and discuss idempotence; keep Python labs as primary hands‑on.
+
+## Optional Mini‑Labs (High Impact)
+
+- SNMP minimal (offline‑first): `day2_cli_to_data/05_snmp_minimal.py` — produces `snmp_ifaces.json` with interface up/down counts.
+- XML parsing + strings: `day1_setup/05_xml_and_strings.py` — shows `split()`, `startswith()`, normalization, writes a small JSON.
+- Config diff (stdlib): `day4_multivendor_config/04_config_diff_demo.py` — demonstrates diffs and idempotence concepts.
+
+See also: `CHEATSHEET.md` and `scripts/run_validations.py`.
+
 
 
 ## Section C: Lab briefs (purpose, steps, validation, cleanup)
