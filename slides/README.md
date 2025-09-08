@@ -23,3 +23,7 @@ paginate: true
 - Day 4: Idempotence, templates & diffs, threaded gather, multi‑vendor VLAN+iface, Ansible intro, config diff demo
 - Day 5: Design review & guardrails, capstone orchestration, presentations & post‑quiz, next steps
 
+## Exports
+
+- CI builds PDF and PPTX into `slides/exports/` on every push affecting `slides/**/*.md`.
+- You can also run Marp locally if preferred (see above).
