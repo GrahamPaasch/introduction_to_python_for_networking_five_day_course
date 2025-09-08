@@ -33,14 +33,15 @@ Prerequisites
 Repo structure
 ```
 common/
-	lib/            # shared Python helpers (logging, session, utils)
-	inventory/      # YAML/CSV inputs and derived JSON/SQLite
-		templates/      # Jinja2 templates for config text
+    lib/            # shared Python helpers (logging, session, utils)
+    inventory/      # YAML/CSV inputs and derived JSON/SQLite
+    templates/      # Jinja2 templates for config text
 day1_setup/
 day2_cli_to_data/
 day3_rest_and_json/
 day4_multivendor_config/
 day5_capstone/
+slides/          # Marp-compatible decks per subject/day
 ```
 
 
