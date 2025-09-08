@@ -10,3 +10,5 @@ ntc-templates
 ansible-core>=2.16,<2.18
 PyYAML
 sqlite-utils
+Jinja2>=3,<4
+pysnmp
