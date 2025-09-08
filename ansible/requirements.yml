@@ -1,5 +1,5 @@
 ---
 collections:
+  - name: community.network
   - name: cisco.ios
   - name: junipernetworks.junos
-

@@ -8,6 +8,7 @@
 - Quick runs
   - Day 1 basics: `python day1_setup/01_python_basics.py`
   - XML + strings: `python day1_setup/05_xml_and_strings.py`
+  - Inventory bootstrap (Day 1): `python day1_setup/06_inventory_bootstrap.py`
   - CSV→YAML: `python day2_cli_to_data/03_csv_to_yaml.py common/inventory/devices.example.csv common/inventory/devices.example.yaml`
   - Inventory persist: `python day2_cli_to_data/00_inventory_persist.py`
   - Syslog parse: `python day2_cli_to_data/04_syslog_parse.py`
@@ -27,7 +28,7 @@
   - Logging: INFO → file + console; WARNING/ERROR for failures
   - Timeouts + retries for all network I/O
   - Secrets via env vars, never in code
+  - Templates: use Jinja2 in `common/templates/` for config text
 
 - Helpful stdlib
   - `json`, `csv`, `sqlite3`, `ipaddress`, `difflib`, `argparse`, `pathlib`
-

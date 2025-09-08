@@ -1,10 +1,10 @@
 # Python 3.11 for Network Engineers — 5‑Day Intensive (Cisco & Juniper)
 
-This repository contains the full curriculum, labs, and setup for a 5‑day, production‑safe, hands‑on training focused on Python 3.11 network automation for Cisco IOS XE / NX‑OS and Juniper Junos.
+This repository contains the full curriculum, labs, and setup for a 5‑day, production‑safe, hands‑on training focused on Python 3.11 network automation for Cisco IOS XE / NX‑OS and Juniper Junos (including applicable firewall workflows).
 
 Audience: 5–15 years network engineering experience; Python beginner. Delivery: remote across US/EU time zones. Devices: 2 per student (sandbox/sim).
 
-Vendor targets and tooling: Netmiko 4.x, NAPALM 3.x, Nornir 3.x, Ansible (core), Requests ≥2.32, HTTPX (sync), Python stdlib json, concurrent.futures. Vendor APIs: Cisco RESTCONF, Junos REST API. Lab backends: Cisco DevNet Sandbox, Juniper vLabs; fallbacks: httpbin.org and jsonplaceholder.typicode.com. No production changes.
+Vendor targets and tooling: Netmiko 4.x, NAPALM 3.x, Nornir 3.x, Ansible (core + collections), Requests ≥2.32, HTTPX (sync), Jinja2 (templates), pysnmp (SNMP), Python stdlib json, concurrent.futures. Vendor APIs: Cisco RESTCONF, Junos REST API. Lab backends: Cisco DevNet Sandbox, Juniper vLabs; fallbacks: httpbin.org and jsonplaceholder.typicode.com. No production changes.
 
 
 ## Section A: One‑page overview
@@ -35,7 +35,7 @@ Repo structure
 common/
 	lib/            # shared Python helpers (logging, session, utils)
 	inventory/      # YAML/CSV inputs and derived JSON/SQLite
-	templates/      # minimal text templates for configs
+		templates/      # Jinja2 templates for config text
 day1_setup/
 day2_cli_to_data/
 day3_rest_and_json/
@@ -54,10 +54,10 @@ Day 1 — Python Foundations + Safe Device Access (≤40% lecture, ≥60% lab)
 - 08:00–09:30 — Lab 1.1: Workstation setup + venv + package checks
 - 09:30–09:40 — Break
 - 09:40–10:20 — Lecture: functions, modules, error handling, logging
-- 10:20–12:00 — Lab 1.2: Inventory from CSV/YAML → JSON; basic CLI parsing
+- 10:20–12:00 — Lab 1.2: Inventory from CSV/YAML → JSON; basic CLI parsing (see `day1_setup/06_inventory_bootstrap.py`)
 - 12:00–12:30 — Lunch
 - 12:30–13:00 — Lecture: TextFSM vs NAPALM getters; JSON handling
-- 13:00–15:00 — Lab 1.3: Netmiko show commands; parse and persist
+- 13:00–15:00 — Lab 1.3: Netmiko show commands (routers/switches/firewalls); parse and persist
 - 15:00–15:10 — Break
 - 15:10–16:00 — Checkpoint + daily quiz
 - 16:00–16:30 — Office hours / timezone Q&A
@@ -138,6 +138,7 @@ Expected artifacts
 Cheat sheet
 - Day 1 basics: run `python day1_setup/01_python_basics.py` and confirm INFO logs.
 - XML + strings: `python day1_setup/05_xml_and_strings.py` → outputs `common/outputs/devices_from_xml.json`.
+- Inventory bootstrap: `python day1_setup/06_inventory_bootstrap.py` → writes `common/outputs/devices.json`.
 - Syslog parsing: `python day2_cli_to_data/04_syslog_parse.py` → outputs `common/outputs/syslog_events.json` (non‑empty).
 - Inventory persist: `python day2_cli_to_data/00_inventory_persist.py` → creates `common/outputs/devices.json` and `common/outputs/inventory.sqlite`.
 - NAPALM getters: `OFFLINE=1 python day2_cli_to_data/02_napalm_getters.py` → writes `common/outputs/napalm_results.json`.
@@ -153,6 +154,7 @@ Cheat sheet
 Notes
 - All config scripts default to dry‑run. Set `COMMIT=true` to apply changes.
 - Environment secrets via `NET_USERNAME` and `NET_PASSWORD`.
+ - `NET_SECRET` can be set for devices requiring enable/privileged mode (e.g., ASA).
 
 ## Ansible (Bonus)
 
@@ -161,7 +163,7 @@ Notes
   - `ansible-playbook -i ansible/inventory.yaml ansible/site.yaml --syntax-check`
   - `ansible-playbook -i ansible/inventory.yaml ansible/site.yaml --check -v`
 - Collections (if internet available):
-  - `ansible-galaxy collection install -r ansible/requirements.yml`
+  - `ansible-galaxy collection install -r ansible/requirements.yml` (includes `community.network`, `cisco.ios`, `junipernetworks.junos`)
 - In restricted environments, demo with `--syntax-check` and discuss idempotence; keep Python labs as primary hands‑on.
 
 ## Optional Mini‑Labs (High Impact)
@@ -169,6 +171,7 @@ Notes
 - SNMP minimal (offline‑first): `day2_cli_to_data/05_snmp_minimal.py` — produces `snmp_ifaces.json` with interface up/down counts.
 - XML parsing + strings: `day1_setup/05_xml_and_strings.py` — shows `split()`, `startswith()`, normalization, writes a small JSON.
 - Config diff (stdlib): `day4_multivendor_config/04_config_diff_demo.py` — demonstrates diffs and idempotence concepts.
+- Routing (OSPF) stretch: simple OSPF parameter update across platforms with validation (skeleton; optional).
 
 See also: `CHEATSHEET.md` and `scripts/run_validations.py`.
 
@@ -205,9 +208,9 @@ Lab 1.1 — Workstation setup + package checks
 	4) Install packages (pinned major)
 		 ```powershell
 		 python -m pip install --upgrade pip
-		 pip install "netmiko>=4,<5" "napalm>=3,<4" "nornir>=3,<4" "nornir-netmiko>=1,<2" "nornir-napalm>=0.4,<0.5" \
-			 "requests>=2.32,<3" "httpx>=0.27,<1" textfsm ntc-templates "ansible-core>=2.16,<2.18" \
-			 pyyaml sqlite-utils
+			 pip install "netmiko>=4,<5" "napalm>=3,<4" "nornir>=3,<4" "nornir-netmiko>=1,<2" "nornir-napalm>=0.4,<0.5" \
+				 "requests>=2.32,<3" "httpx>=0.27,<1" textfsm ntc-templates "ansible-core>=2.16,<2.18" \
+				 pyyaml sqlite-utils Jinja2 pysnmp
 		 ```
 	5) Version check
 		 ```powershell
@@ -243,9 +246,9 @@ PY
 	4) Install packages
 		 ```bash
 		 python -m pip install --upgrade pip
-		 pip install "netmiko>=4,<5" "napalm>=3,<4" "nornir>=3,<4" "nornir-netmiko>=1,<2" "nornir-napalm>=0.4,<0.5" \
-			 "requests>=2.32,<3" "httpx>=0.27,<1" textfsm ntc-templates "ansible-core>=2.16,<2.18" \
-			 pyyaml sqlite-utils
+			 pip install "netmiko>=4,<5" "napalm>=3,<4" "nornir>=3,<4" "nornir-netmiko>=1,<2" "nornir-napalm>=0.4,<0.5" \
+				 "requests>=2.32,<3" "httpx>=0.27,<1" textfsm ntc-templates "ansible-core>=2.16,<2.18" \
+				 pyyaml sqlite-utils Jinja2 pysnmp
 		 ```
 - Validation
 	- `python -c "import netmiko,napalm,requests,httpx; print('ok')"` prints ok.
