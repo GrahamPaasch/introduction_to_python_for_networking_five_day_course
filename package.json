@@ -1,0 +1,21 @@
+{
+  "name": "introduction_to_python_for_networking_five_day_course",
+  "version": "1.0.0",
+  "description": "This repository contains the full curriculum, labs, and setup for a 5‑day, production‑safe, hands‑on training focused on Python 3.11 network automation for Cisco IOS XE / NX‑OS and Juniper Junos (including applicable firewall workflows).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GrahamPaasch/introduction_to_python_for_networking_five_day_course.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/GrahamPaasch/introduction_to_python_for_networking_five_day_course/issues"
+  },
+  "homepage": "https://github.com/GrahamPaasch/introduction_to_python_for_networking_five_day_course#readme"
+}
