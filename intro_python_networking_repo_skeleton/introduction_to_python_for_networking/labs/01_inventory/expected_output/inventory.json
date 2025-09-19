@@ -1,0 +1,26 @@
+[
+  {
+    "hostname": "r1",
+    "ip": "10.0.0.11",
+    "platform": "cisco_ios",
+    "username": "student",
+    "password": "password",
+    "secret": "cisco"
+  },
+  {
+    "hostname": "r2",
+    "ip": "10.0.0.12",
+    "platform": "cisco_ios",
+    "username": "student",
+    "password": "password",
+    "secret": "cisco"
+  },
+  {
+    "hostname": "j1",
+    "ip": "10.0.0.21",
+    "platform": "juniper_junos",
+    "username": "student",
+    "password": "password",
+    "secret": ""
+  }
+]

@@ -1,0 +1,4 @@
+hostname,ip,platform,username,password,secret
+r1,10.0.0.11,cisco_ios,student,password,cisco
+r2,10.0.0.12,cisco_ios,student,password,cisco
+j1,10.0.0.21,juniper_junos,student,password,

@@ -1,0 +1,5 @@
+<13>Sep 18 10:21:00 r1 %LINK-3-UPDOWN: Interface GigabitEthernet0/1, changed state to down
+<13>Sep 18 10:22:03 r1 %LINK-3-UPDOWN: Interface GigabitEthernet0/1, changed state to up
+<14>Sep 18 10:30:01 j1 mib: SNMP_TRAP_LINK_DOWN ifIndex 12
+<14>Sep 18 10:31:11 j1 mib: SNMP_TRAP_LINK_UP ifIndex 12
+<5>Sep 18 11:00:00 r2 %SYS-5-CONFIG_I: Configured from console by student

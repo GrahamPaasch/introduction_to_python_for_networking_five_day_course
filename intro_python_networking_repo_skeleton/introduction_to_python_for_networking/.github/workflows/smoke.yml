@@ -1,0 +1,29 @@
+name: smoke
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, master ]
+  pull_request:
+
+jobs:
+  smoke:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r environment/requirements.txt
+      - name: Import smoke
+        run: |
+          python - <<'PY'
+          import importlib
+          for m in ("netmiko","requests","jinja2","yaml","textfsm","pysnmp"):
+              importlib.import_module(m)
+          print("imports: ok")
+          PY

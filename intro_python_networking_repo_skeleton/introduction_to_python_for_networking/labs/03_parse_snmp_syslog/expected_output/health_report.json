@@ -1,0 +1,17 @@
+{
+  "r1": {
+    "cpu_pct": 18,
+    "mem_pct": 35,
+    "link_events": 2
+  },
+  "r2": {
+    "cpu_pct": 22,
+    "mem_pct": 42,
+    "link_events": 1
+  },
+  "j1": {
+    "cpu_pct": 12,
+    "mem_pct": 55,
+    "link_events": 2
+  }
+}

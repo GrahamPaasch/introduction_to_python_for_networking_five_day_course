@@ -1,0 +1,8 @@
+---
+- name: VLAN example (placeholder)
+  hosts: cisco
+  gather_facts: no
+  tasks:
+    - name: Example - ensure VLAN 123 exists (placeholder task)
+      debug:
+        msg: "Would create VLAN 123 on {{ inventory_hostname }}"

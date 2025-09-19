@@ -1,0 +1,1 @@
+Drop your GNS3 screenshots (PNG/SVG) here and update docs/gns3.md.
