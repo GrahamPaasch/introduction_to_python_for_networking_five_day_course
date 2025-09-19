@@ -1,0 +1,12 @@
+git add README.md SCHEDULE.md PREWORK.md assets/gns3/login-table.md assets/gns3/topology-diagram.png \
+  day01_foundations_connectivity day02_snmp_syslog day03_rest_apis day04_config_and_ansible day05_capstone \
+  environment/requirements.txt environment/bootstrap.sh
+git commit -m "feat: add day-by-day teaching manual overlay"
+
+git add POST-REWRITE-NOTICE.md
+git commit -m "docs: warn collaborators about history rewrite"
+
+# Optional: capture the resolved dependency set after running environment/bootstrap.sh
+pip freeze > environment/requirements.lock
+git add environment/requirements.lock
+git commit -m "chore: track resolved Python dependencies"
