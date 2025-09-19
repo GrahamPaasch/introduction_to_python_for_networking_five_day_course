@@ -1,6 +1,0 @@
-Acceptance Criteria
-- [ ] `client_requirements.png` absent across all refs (confirmed with verify_scrub.sh)
-- [ ] Legacy SHAs 14bce63 and 2ffc08d no longer in the commit graph
-- [ ] GitHub Support ticket submitted and acknowledged
-- [ ] Teacher manual overlay committed and pushed
-- [ ] Day 1 instructor/student guides reviewed and ready to deliver

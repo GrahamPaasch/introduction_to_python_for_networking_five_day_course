@@ -6,8 +6,8 @@
 - Prepare teams to integrate all artifacts into the final capstone.
 
 ## Prep
-- Verify device credentials and Ansible inventory entries in `assets/gns3/login-table.md`.
-- Review `day04_config_and_ansible/labs/05_config_vlan/starter` and `day04_config_and_ansible/labs/06_ansible_intro/starter`.
+- Verify device credentials and Ansible inventory entries in `click_me_09_gns3_assets/gns3/login-table.md`.
+- Review `./labs/05_config_vlan/starter` and `./labs/06_ansible_intro/starter`.
 - Pre-test Ansible connectivity inside the course virtual environment.
 
 ## Schedule

@@ -6,7 +6,7 @@
 - A retrospective documenting team lessons learned and production readiness items.
 
 ## Steps
-1. Consolidate artifacts from Days 1–4 inside your team folder; ensure screenshots in `assets/gns3/` are up to date.
+1. Consolidate artifacts from Days 1–4 inside your team folder; ensure screenshots in `click_me_09_gns3_assets/gns3/` are up to date.
 2. Activate the virtual environment (`source .venv/bin/activate`) to run any final scripts.
 3. Build the end-to-end demo flow, validating each stage with offline fixtures before live execution.
 4. Rehearse your presentation, ensuring everyone speaks to a portion of the automation story.

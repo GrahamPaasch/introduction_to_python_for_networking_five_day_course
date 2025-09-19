@@ -7,7 +7,7 @@
 
 ## Prep
 - Validate REST API credentials or tokens for the target platforms. [TODO: Insert API endpoint details.]
-- Review the offline API fixtures in `day03_rest_apis/labs/04_rest_apis/starter`.
+- Review the offline API fixtures in `./labs/04_rest_apis/starter`.
 - Ensure Postman or curl-based demos are ready for classroom projection.
 
 ## Schedule

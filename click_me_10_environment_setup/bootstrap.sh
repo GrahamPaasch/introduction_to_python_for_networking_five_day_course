@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
 VENV_DIR="${ROOT_DIR}/.venv"
 
 if [[ ! -d "$VENV_DIR" ]]; then
@@ -12,7 +13,7 @@ fi
 source "${VENV_DIR}/bin/activate"
 
 pip install --upgrade pip
-pip install -r "${ROOT_DIR}/environment/requirements.txt"
+pip install -r "${SCRIPT_DIR}/requirements.txt"
 
 python <<'PY'
 import importlib

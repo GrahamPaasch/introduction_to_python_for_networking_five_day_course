@@ -6,8 +6,8 @@
 - Prepare teams to feed Day 3 REST workflows with normalized device state.
 
 ## Prep
-- Verify SNMP community strings or credentials in `assets/gns3/login-table.md`. [TODO: Confirm SNMP credentials.]
-- Review offline SNMP walks and syslog captures in `day02_snmp_syslog/labs/03_parse_snmp_syslog/starter`.
+- Verify SNMP community strings or credentials in `click_me_09_gns3_assets/gns3/login-table.md`. [TODO: Confirm SNMP credentials.]
+- Review offline SNMP walks and syslog captures in `./labs/03_parse_snmp_syslog/starter`.
 - Ensure the syslog parsing scripts run cleanly inside the virtual environment.
 
 ## Schedule
