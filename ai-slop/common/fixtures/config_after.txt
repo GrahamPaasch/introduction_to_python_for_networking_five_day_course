@@ -1,5 +1,0 @@
-vlan 123
- name TRAINING_VLAN
-interface GigabitEthernet1
- description Managed by Automation Training
-

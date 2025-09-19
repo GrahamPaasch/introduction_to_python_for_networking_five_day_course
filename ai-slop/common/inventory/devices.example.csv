@@ -1,3 +1,0 @@
-name,host,os,platform,username,password,port
-iosxe-sandbox,sandbox-iosxe-latest-1.cisco.com,cisco,iosxe,developer,C1sco12345,22
-junos-vlabs,vlabs.juniper.net,juniper,junos,lab,lab123,22

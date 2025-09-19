@@ -1,6 +1,0 @@
-[
-  {"ifIndex": 1, "ifDescr": "GigabitEthernet1", "ifType": 6, "ifOperStatus": 1},
-  {"ifIndex": 2, "ifDescr": "GigabitEthernet2", "ifType": 6, "ifOperStatus": 2},
-  {"ifIndex": 3, "ifDescr": "Loopback0", "ifType": 24, "ifOperStatus": 1}
-]
-

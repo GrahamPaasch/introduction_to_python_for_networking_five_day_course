@@ -1,9 +1,0 @@
-{
-  "ietf-interfaces:interfaces": {
-    "interface": [
-      {"name": "GigabitEthernet1", "enabled": true, "description": "Mgmt"},
-      {"name": "Loopback0", "enabled": true, "description": "Loopback"}
-    ]
-  }
-}
-
